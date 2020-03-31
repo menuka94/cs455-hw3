@@ -10,5 +10,6 @@ public class TestReducer extends Reducer {
     @Override
     protected void reduce(Object key, Iterable values, Context context) {
         log.info("reduce()");
+        log.info(key.toString());
     }
 }
