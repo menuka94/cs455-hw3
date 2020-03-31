@@ -23,10 +23,6 @@ dependencies {
 }
 
 jar {
-    manifest {
-        attributes "Main-Class": "cs455.hadoop.Main"
-    }
-
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
