@@ -13,6 +13,13 @@ public class Main {
     private static final Logger log = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+
+        String inputPath = args[0];
+        String outputPath = args[1];
+
+        log.info("inputPath: " + inputPath);
+        log.info("outputPath: " + outputPath);
+
         Configuration conf = new Configuration();
 
         try {
