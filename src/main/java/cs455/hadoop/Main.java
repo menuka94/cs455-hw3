@@ -2,6 +2,7 @@ package cs455.hadoop;
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -30,6 +31,12 @@ public class Main {
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(args[0]));
+
+            // Delete output if exists
+            FileSystem hdfs = FileSystem.get(conf);
+            if (hdfs.exists(new Path(outputPath))) {
+                hdfs.delete(new Path(outputPath), true);
+            }
 
             FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
