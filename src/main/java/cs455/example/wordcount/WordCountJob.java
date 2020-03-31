@@ -53,6 +53,5 @@ public class WordCountJob {
         } catch (IOException | InterruptedException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }
-
     }
 }
