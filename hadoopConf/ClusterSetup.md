@@ -56,3 +56,7 @@ $HADOOP_HOME/sbin/stop-yarn.sh
 ### Port Forwading to access Web UIs
 * `ssh -NL 10000:localhost:32453 menukaw@richmond.cs.colostate.edu`
 
+[Hadoop: Setting up a Single Node Cluster](https://hadoop.apache.org/docs/stable/hadoop-project-dist
+/hadoop-common
+/SingleCluster.html)
+
