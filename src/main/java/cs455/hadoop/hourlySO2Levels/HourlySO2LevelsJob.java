@@ -31,7 +31,7 @@ public class HourlySO2LevelsJob {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Max Monitoring Sites Job");
+            Job job = Job.getInstance(conf, "Hourly SO2 Levels Job");
             job.setJarByClass(HourlySO2LevelsJob.class);
             job.setMapperClass(HourlySO2LevelsMapper.class);
             job.setReducerClass(HourlySO2LevelsReducer.class);
