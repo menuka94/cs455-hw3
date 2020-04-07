@@ -17,7 +17,8 @@ public class Main {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Usage: cs455.hadoop.Main inputPath outputPath");
+            System.out.println("Usage: " + Main.class + " inputPath outputPath");
+            System.exit(1);
         }
 
         String inputPath = args[0];

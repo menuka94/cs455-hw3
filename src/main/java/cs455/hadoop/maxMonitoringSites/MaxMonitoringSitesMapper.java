@@ -1,6 +1,7 @@
 package cs455.hadoop.maxMonitoringSites;
 
 import java.io.IOException;
+import cs455.hadoop.util.Constants;
 import cs455.hadoop.util.DataFields;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -16,7 +17,7 @@ public class MaxMonitoringSitesMapper extends Mapper<LongWritable, Text, Text, C
         if (key.get() == 0 && value.toString().contains("State")) {
             log.info("Skipping header row");
         } else {
-            String[] splits = value.toString().split(",");
+            String[] splits = value.toString().split(Constants.DELIMETER);
 
             String stateCode = splits[DataFields.STATE_CODE - 1].replaceAll("\"", "");
             String countyCode = splits[DataFields.COUNTY_CODE - 1].replaceAll("\"", "");

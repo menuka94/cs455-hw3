@@ -11,6 +11,6 @@
 
 5. What are the top 10 hottest states for the summer months (June, July, August)? Capture the mean temperature levels for the summer months (GMT) to justify your answer.
 
-6. What is the mean SO2 levels for the hottest states found in Question 5?
+6. What are the mean SO2 levels for the hottest states found in Question 5?
 
 
