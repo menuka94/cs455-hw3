@@ -1,10 +1,7 @@
-package cs455.hadoop.job;
+package cs455.hadoop.maxMonitoringSites;
 
 import java.io.IOException;
 import cs455.hadoop.Main;
-import cs455.hadoop.combiner.MaxMonitoringSitesCombiner;
-import cs455.hadoop.mapper.MaxMonitoringSitesMapper;
-import cs455.hadoop.util.CountySiteNumWritable;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -39,6 +36,7 @@ public class MaxMonitoringSitesJob {
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(inputPath));
+            FileInputFormat.setInputDirRecursive(job, true);
 
             // Delete output if exists
             FileSystem hdfs = FileSystem.get(conf);

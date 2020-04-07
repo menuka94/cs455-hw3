@@ -1,9 +1,8 @@
-package cs455.hadoop.combiner;
+package cs455.hadoop.maxMonitoringSites;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import cs455.hadoop.util.CountySiteNumWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;

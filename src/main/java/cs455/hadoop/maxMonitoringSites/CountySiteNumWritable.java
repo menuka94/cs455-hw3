@@ -1,4 +1,4 @@
-package cs455.hadoop.util;
+package cs455.hadoop.maxMonitoringSites;
 
 import java.io.DataInput;
 import java.io.DataOutput;

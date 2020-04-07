@@ -171,4 +171,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+sample-data/cs455-hw3-data
+sample-data/output
+
 # End of https://www.gitignore.io/api/java,macos,gradle,intellij+all,visualstudiocode

@@ -1,7 +1,6 @@
-package cs455.hadoop.mapper;
+package cs455.hadoop.maxMonitoringSites;
 
 import java.io.IOException;
-import cs455.hadoop.util.CountySiteNumWritable;
 import cs455.hadoop.util.DataFields;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
