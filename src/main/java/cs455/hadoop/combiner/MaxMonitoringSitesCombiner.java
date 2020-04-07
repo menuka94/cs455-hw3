@@ -1,6 +1,8 @@
 package cs455.hadoop.combiner;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 import cs455.hadoop.util.CountySiteNumWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -13,11 +15,26 @@ public class MaxMonitoringSitesCombiner extends Reducer<Text, CountySiteNumWrita
 
     @Override
     protected void reduce(Text key, Iterable<CountySiteNumWritable> values, Context context) throws IOException, InterruptedException {
+        HashMap<Integer, HashSet<Integer>> countySiteMap = new HashMap<>();
+
         // processing one state
         log.info("Processing: " + key.toString());
-        int total = 0;
         for (CountySiteNumWritable value : values) {
-            total++;
+            CountySiteNumWritable composite = new CountySiteNumWritable(value.getCountyCode(),
+                    value.getSiteNum());
+
+            if (countySiteMap.containsKey(composite.getCountyCode())) {
+                countySiteMap.get(composite.getCountyCode()).add(composite.getSiteNum());
+            } else {
+                HashSet<Integer> siteSet = new HashSet<>();
+                siteSet.add(composite.getSiteNum());
+                countySiteMap.put(composite.getCountyCode(), siteSet);
+            }
+        }
+
+        int total = 0;
+        for (HashSet<Integer> set : countySiteMap.values()) {
+            total += set.size();
         }
 
         context.write(key, new IntWritable(total));

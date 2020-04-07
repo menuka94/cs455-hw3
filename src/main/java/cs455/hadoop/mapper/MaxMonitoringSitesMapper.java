@@ -23,7 +23,6 @@ public class MaxMonitoringSitesMapper extends Mapper<LongWritable, Text, Text, C
             String countyCode = splits[DataFields.COUNTY_CODE - 1].replaceAll("\"", "");
             String siteNum = splits[DataFields.SITE_NUM - 1].replaceAll("\"", "");
 
-
             try {
                 int countyCodeInt = Integer.parseInt(countyCode.trim());
                 int siteNumInt = Integer.parseInt(siteNum.trim());
@@ -35,8 +34,6 @@ public class MaxMonitoringSitesMapper extends Mapper<LongWritable, Text, Text, C
                 log.error("Invalid data");
                 e.printStackTrace();
             }
-
-
         }
     }
 }
