@@ -1,12 +1,13 @@
-package cs455.hadoop;
+package cs455.hadoop.job;
 
 import java.io.IOException;
-import cs455.hadoop.mapper.TestMapper;
-import cs455.hadoop.reducer.TestReducer;
+import cs455.hadoop.Main;
+import cs455.hadoop.combiner.MaxMonitoringSitesCombiner;
+import cs455.hadoop.mapper.MaxMonitoringSitesMapper;
+import cs455.hadoop.util.CountySiteNumWritable;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -14,8 +15,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Main {
-    private static final Logger log = LogManager.getLogger(Main.class);
+public class MaxMonitoringSitesJob {
+    private static final Logger log = LogManager.getLogger(MaxMonitoringSitesJob.class);
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -31,10 +32,10 @@ public class Main {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Sample Job");
+            Job job = Job.getInstance(conf, "Max Monitoring Sites Job");
             job.setJarByClass(Main.class);
-            job.setMapperClass(TestMapper.class);
-            job.setReducerClass(TestReducer.class);
+            job.setMapperClass(MaxMonitoringSitesMapper.class);
+            job.setReducerClass(MaxMonitoringSitesCombiner.class);
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(inputPath));
@@ -49,7 +50,7 @@ public class Main {
 
             // Outputs from the Mapper.
             job.setMapOutputKeyClass(Text.class);
-            job.setMapOutputValueClass(IntWritable.class);
+            job.setMapOutputValueClass(CountySiteNumWritable.class);
 
             // block until the job is completed
             System.exit(job.waitForCompletion(true) ? 0 : 1);

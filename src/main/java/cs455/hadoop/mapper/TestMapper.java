@@ -1,4 +1,4 @@
-package cs455.hadoop;
+package cs455.hadoop.mapper;
 
 import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
