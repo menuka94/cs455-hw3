@@ -30,7 +30,7 @@ public class HottestStatesJob {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Higher SO2 Levels Job");
+            Job job = Job.getInstance(conf, "Hottest States Job");
             job.setJarByClass(HottestStatesJob.class);
             job.setMapperClass(HottestStatesMapper.class);
             job.setReducerClass(HottestStatesReducer.class);

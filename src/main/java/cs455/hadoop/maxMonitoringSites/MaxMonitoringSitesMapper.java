@@ -28,7 +28,9 @@ public class MaxMonitoringSitesMapper extends Mapper<LongWritable, Text, Text, C
                 int siteNumInt = Integer.parseInt(siteNum.trim());
                 CountySiteNumWritable writable = new CountySiteNumWritable(countyCodeInt, siteNumInt);
 
-                context.write(new Text(stateCode), writable);
+                String state = splits[DataFields.STATE_NAME - 1].replaceAll("\"", "");
+
+                context.write(new Text(state), writable);
 
             } catch (NumberFormatException e) {
                 log.error("Invalid data");
