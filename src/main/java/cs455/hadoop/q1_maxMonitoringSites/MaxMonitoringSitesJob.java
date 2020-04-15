@@ -1,7 +1,5 @@
 package cs455.hadoop.q1_maxMonitoringSites;
 
-import java.io.IOException;
-import cs455.hadoop.Main;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -11,6 +9,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 public class MaxMonitoringSitesJob {
     private static final Logger log = LogManager.getLogger(MaxMonitoringSitesJob.class);
@@ -31,7 +31,7 @@ public class MaxMonitoringSitesJob {
 
         try {
             Job job = Job.getInstance(conf, "Max Monitoring Sites Job");
-            job.setJarByClass(Main.class);
+            job.setJarByClass(MaxMonitoringSitesJob.class);
             job.setMapperClass(MaxMonitoringSitesMapper.class);
             job.setReducerClass(MaxMonitoringSitesCombiner.class);
 

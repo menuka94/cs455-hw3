@@ -1,23 +1,24 @@
-package cs455.hadoop;
+package cs455.hadoop.q6_meanSO2Levels;
 
-import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
-public class Main {
-    private static final Logger log = LogManager.getLogger(Main.class);
+import java.io.IOException;
+
+public class MeanSO2LevelsJob {
+    private static final Logger log = LogManager.getLogger(MeanSO2LevelsJob.class);
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Usage: " + Main.class + " inputPath outputPath");
+            System.out.println("Usage: " + MeanSO2LevelsJob.class + " inputPath outputPath");
             System.exit(1);
         }
 
@@ -30,13 +31,14 @@ public class Main {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Sample Job");
-            job.setJarByClass(Main.class);
-            job.setMapperClass(TestMapper.class);
-            job.setReducerClass(TestReducer.class);
+            Job job = Job.getInstance(conf, "Q6 - Mean SO2 Levels Job");
+            job.setJarByClass(MeanSO2LevelsJob.class);
+            job.setMapperClass(MeanSO2LevelsMapper.class);
+            job.setReducerClass(MeanSO2LevelsReducer.class);
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(inputPath));
+            FileInputFormat.setInputDirRecursive(job, true);
 
             // Delete output if exists
             FileSystem hdfs = FileSystem.get(conf);
@@ -48,7 +50,7 @@ public class Main {
 
             // Outputs from the Mapper.
             job.setMapOutputKeyClass(Text.class);
-            job.setMapOutputValueClass(IntWritable.class);
+            job.setMapOutputValueClass(DoubleWritable.class);
 
             // block until the job is completed
             System.exit(job.waitForCompletion(true) ? 0 : 1);
