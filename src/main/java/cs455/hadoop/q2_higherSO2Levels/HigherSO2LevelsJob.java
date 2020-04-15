@@ -1,4 +1,4 @@
-package cs455.hadoop.yearlySO2Levels;
+package cs455.hadoop.q2_higherSO2Levels;
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
@@ -12,12 +12,12 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class YearlySO2LevelsJob {
-    private static final Logger log = LogManager.getLogger(YearlySO2LevelsJob.class);
+public class HigherSO2LevelsJob {
+    private static final Logger log = LogManager.getLogger(HigherSO2LevelsJob.class);
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Usage: " + YearlySO2LevelsJob.class + " inputPath outputPath");
+            System.out.println("Usage: " + HigherSO2LevelsJob.class + " inputPath outputPath");
             System.exit(1);
         }
 
@@ -30,14 +30,13 @@ public class YearlySO2LevelsJob {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Yearly SO2 Levels Job");
-            job.setJarByClass(YearlySO2LevelsJob.class);
-            job.setMapperClass(YearlySO2LevelsMapper.class);
-            job.setReducerClass(YearlySO2LevelsReducer.class);
+            Job job = Job.getInstance(conf, "Higher SO2 Levels Job");
+            job.setJarByClass(HigherSO2LevelsJob.class);
+            job.setMapperClass(HigherSO2LevelsMapper.class);
+            job.setReducerClass(HigherSO2LevelsReducer.class);
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(inputPath));
-            FileInputFormat.setInputDirRecursive(job, true);
 
             // Delete output if exists
             FileSystem hdfs = FileSystem.get(conf);

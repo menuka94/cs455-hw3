@@ -1,7 +1,6 @@
-package cs455.hadoop.hourlySO2Levels;
+package cs455.hadoop.q5_hottestStates;
 
 import java.io.IOException;
-import cs455.hadoop.Main;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -13,12 +12,12 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class HourlySO2LevelsJob {
-    private static final Logger log = LogManager.getLogger(HourlySO2LevelsJob.class);
+public class HottestStatesJob {
+    private static final Logger log = LogManager.getLogger(HottestStatesJob.class);
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Usage: " + HourlySO2LevelsJob.class + " inputPath outputPath");
+            System.out.println("Usage: " + HottestStatesJob.class + " inputPath outputPath");
             System.exit(1);
         }
 
@@ -31,14 +30,13 @@ public class HourlySO2LevelsJob {
         Configuration conf = new Configuration();
 
         try {
-            Job job = Job.getInstance(conf, "Hourly SO2 Levels Job");
-            job.setJarByClass(HourlySO2LevelsJob.class);
-            job.setMapperClass(HourlySO2LevelsMapper.class);
-            job.setReducerClass(HourlySO2LevelsReducer.class);
+            Job job = Job.getInstance(conf, "Hottest States Job");
+            job.setJarByClass(HottestStatesJob.class);
+            job.setMapperClass(HottestStatesMapper.class);
+            job.setReducerClass(HottestStatesReducer.class);
 
             // path io input HDFS
             FileInputFormat.addInputPath(job, new Path(inputPath));
-            FileInputFormat.setInputDirRecursive(job, true);
 
             // Delete output if exists
             FileSystem hdfs = FileSystem.get(conf);

@@ -1,4 +1,4 @@
-package cs455.hadoop.higherSO2Levels;
+package cs455.hadoop.q2_higherSO2Levels;
 
 import java.io.IOException;
 import cs455.hadoop.util.Constants;

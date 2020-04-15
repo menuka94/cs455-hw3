@@ -1,4 +1,4 @@
-package cs455.hadoop.hottestStates;
+package cs455.hadoop.q5_hottestStates;
 
 import java.io.IOException;
 import cs455.hadoop.util.Constants;

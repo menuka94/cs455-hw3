@@ -1,4 +1,4 @@
-package cs455.hadoop.maxMonitoringSites;
+package cs455.hadoop.q1_maxMonitoringSites;
 
 import java.io.DataInput;
 import java.io.DataOutput;

@@ -1,4 +1,4 @@
-package cs455.hadoop.yearlySO2Levels;
+package cs455.hadoop.q2_higherSO2Levels;
 
 import java.io.IOException;
 import cs455.hadoop.util.Constants;
@@ -10,8 +10,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class YearlySO2LevelsMapper extends Mapper<LongWritable, Text, Text, DoubleWritable> {
-    private static final Logger log = LogManager.getLogger(YearlySO2LevelsMapper.class);
+public class HigherSO2LevelsMapper extends Mapper<LongWritable, Text, Text, DoubleWritable> {
+    private static final Logger log = LogManager.getLogger(HigherSO2LevelsMapper.class);
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -19,15 +19,19 @@ public class YearlySO2LevelsMapper extends Mapper<LongWritable, Text, Text, Doub
             log.info("Skipping header row");
         } else {
             String[] splits = value.toString().split(Constants.DELIMETER);
-            String sampleMeasurementString = splits[DataFields.SAMPLE_MEASUREMENT - 1].replaceAll("\"", "");
+            String state = splits[DataFields.STATE_NAME - 1].replaceAll("\"", "");
+            String sampleMeasurementString = splits[DataFields.SAMPLE_MEASUREMENT - 1].replaceAll(
+                    "\"", "");
 
             try {
                 double sampleMeasurement = Double.parseDouble(sampleMeasurementString);
-                String year = splits[DataFields.DATE_GMT - 1].replaceAll("\"", "").substring(0, 4);
-                context.write(new Text(year), new DoubleWritable(sampleMeasurement));
+                if (Constants.eastCoastStates.contains(state)) {
+                    context.write(new Text(Constants.EAST_COAST), new DoubleWritable(sampleMeasurement));
+                } else if (Constants.westCoastStates.contains(state)) {
+                    context.write(new Text(Constants.WEST_COAST), new DoubleWritable(sampleMeasurement));
+                }
             } catch (NumberFormatException e) {
-                log.error("Invalid Sample Measurement");
-                e.printStackTrace();
+                log.error("Invalid ");
             }
         }
     }

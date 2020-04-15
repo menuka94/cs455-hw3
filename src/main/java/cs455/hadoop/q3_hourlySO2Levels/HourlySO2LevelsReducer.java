@@ -1,4 +1,4 @@
-package cs455.hadoop.hourlySO2Levels;
+package cs455.hadoop.q3_hourlySO2Levels;
 
 import java.io.IOException;
 import org.apache.hadoop.io.DoubleWritable;

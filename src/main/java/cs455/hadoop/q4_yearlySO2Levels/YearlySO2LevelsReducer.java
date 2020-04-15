@@ -1,4 +1,4 @@
-package cs455.hadoop.yearlySO2Levels;
+package cs455.hadoop.q4_yearlySO2Levels;
 
 import java.io.IOException;
 import org.apache.hadoop.io.DoubleWritable;

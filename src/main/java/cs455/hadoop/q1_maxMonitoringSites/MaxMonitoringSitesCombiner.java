@@ -1,4 +1,4 @@
-package cs455.hadoop.maxMonitoringSites;
+package cs455.hadoop.q1_maxMonitoringSites;
 
 import java.io.IOException;
 import java.util.HashMap;

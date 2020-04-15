@@ -1,4 +1,4 @@
-package cs455.hadoop.hottestStates;
+package cs455.hadoop.q5_hottestStates;
 
 import java.io.IOException;
 import org.apache.hadoop.io.DoubleWritable;
